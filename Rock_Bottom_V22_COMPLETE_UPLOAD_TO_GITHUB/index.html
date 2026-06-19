@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rock Bottom | Official Film Site</title>
+<style>
+:root{
+  --black:#0b0b0a; --cream:#f4ead7; --gold:#e9bd59; --muted:#b69a78; --panel:#151311; --rust:#bd562c;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--black);color:var(--cream);font-family:Inter,Arial,sans-serif;line-height:1.6;overflow-x:hidden}
+a{color:inherit}
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:flex-end;align-items:center;padding:16px clamp(18px,4vw,52px);background:linear-gradient(to bottom,rgba(0,0,0,.76),rgba(0,0,0,0))}
+.nav-links{display:flex;gap:20px;align-items:center;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em}
+.nav-links a{text-decoration:none;opacity:.9}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 22px;border-radius:999px;text-decoration:none;font-weight:900;letter-spacing:.05em;text-transform:uppercase;border:1px solid rgba(233,189,89,.5);transition:.2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--gold);color:#10100f;border-color:var(--gold)}
+.btn-ghost{color:var(--gold);background:rgba(0,0,0,.35)}
+
+.hero{
+  min-height:100svh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:110px 20px 100px;
+  background:linear-gradient(to bottom,rgba(0,0,0,.04),rgba(0,0,0,.18) 45%,rgba(0,0,0,.72)),
+             url('assets/lookbook/lookbook-page-01.png') center center/cover no-repeat;
+}
+.hero-content{position:relative;z-index:3;max-width:980px;margin:auto}
+.hero-title{
+  display:block;
+  margin:0 0 20px;
+  color:var(--gold);
+  font-size:clamp(4.6rem,12vw,10.5rem);
+  line-height:.86;
+  letter-spacing:.02em;
+  font-weight:1000;
+  text-transform:uppercase;
+  text-shadow:0 8px 42px rgba(0,0,0,.82);
+}
+.logline{max-width:760px;margin:0 auto;font-size:clamp(1.02rem,1.8vw,1.28rem);color:#fff0ca;text-shadow:0 2px 18px rgba(0,0,0,.8)}
+.hero-actions{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:6}
+.hero-actions .btn::before,.hero-actions .btn::after{content:none!important;display:none!important}
+
+section{padding:clamp(70px,9vw,130px) clamp(20px,6vw,78px)}
+.section-inner{max-width:1180px;margin:0 auto}
+h2{margin:0 0 22px;font-size:clamp(2.3rem,5vw,5rem);line-height:.95;color:var(--gold);letter-spacing:-.03em;text-transform:uppercase}
+.eyebrow{color:var(--gold);letter-spacing:.22em;text-transform:uppercase;font-size:.85rem;font-weight:900}
+.lead{font-size:clamp(1.05rem,1.8vw,1.35rem);color:#e7d7bd}
+.statement{max-width:920px;margin:0 auto;font-size:clamp(1.1rem,2vw,1.55rem);color:#f1e2c7}
+.statement p{margin:0 0 1.15em}
+
+.progress-card{background:linear-gradient(145deg,rgba(233,189,89,.12),rgba(156,58,37,.16));border:1px solid rgba(233,189,89,.25);border-radius:28px;padding:clamp(24px,5vw,46px);box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.progress-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+.amount{font-size:clamp(2rem,5vw,4.5rem);color:var(--gold);font-weight:1000;line-height:1}
+.progress-track{height:28px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14)}
+.progress-fill{height:100%;width:0%;min-width:10px;background:linear-gradient(90deg,var(--gold),#fff0a7,var(--rust));border-radius:inherit;animation:loadProgress 1.5s ease forwards,pulseGlow 2.4s infinite ease-in-out;position:relative}
+.progress-fill:after{content:"";position:absolute;inset:0;transform:translateX(-110%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);animation:shimmer 2.2s infinite}
+.progress-note{margin-top:14px;color:var(--muted)}
+
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);gap:clamp(28px,6vw,76px);align-items:center}
+.story-image{width:100%;border-radius:20px;border:1px solid rgba(233,189,89,.18);box-shadow:0 30px 90px rgba(0,0,0,.35);display:block}
+.lookbook-callout{background:linear-gradient(90deg,rgba(11,11,10,.85),rgba(11,11,10,.38)),url('assets/lookbook/lookbook-page-06.png') center/cover no-repeat;border-radius:28px;padding:clamp(28px,6vw,70px);border:1px solid rgba(233,189,89,.24);min-height:460px;display:flex;align-items:flex-end}
+.callout-content{max-width:640px}
+
+.budget-grid,.tier-grid,.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+.card,.tier{background:rgba(255,255,255,.045);border:1px solid rgba(233,189,89,.18);border-radius:22px;padding:24px}
+.card h3,.tier h3{margin:0 0 8px;color:var(--gold);font-size:1.35rem}
+.tier{min-height:160px;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(156,58,37,.1));position:relative;overflow:hidden}
+.tier:before{content:"ROCK BOTTOM";position:absolute;bottom:12px;right:16px;font-size:.7rem;color:rgba(233,189,89,.24);letter-spacing:.18em;font-weight:900}
+
+.team-card{background:#151311;border-radius:24px;overflow:hidden;border:1px solid rgba(233,189,89,.18)}
+.team-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:saturate(.9) contrast(1.02)}
+.team-info{padding:20px}
+.role{color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-size:.8rem;font-weight:800}
+.team-info h3{margin:4px 0;color:var(--cream);font-size:1.45rem}
+.imdb-link{color:var(--gold);text-decoration:none;font-weight:800}
+.placeholder{aspect-ratio:4/5;display:grid;place-items:center;color:var(--gold);font-weight:1000;letter-spacing:.12em;background:linear-gradient(135deg,#31130d,#0f0f0f);text-align:center;padding:20px}
+
+.sticky-donate{position:fixed;right:20px;bottom:20px;z-index:40;box-shadow:0 14px 42px rgba(0,0,0,.35)}
+footer{text-align:center;padding:70px 20px 100px;background:#070706;color:var(--muted)}
+
+@keyframes loadProgress{from{width:0%}to{width:0%}}
+@keyframes shimmer{to{transform:translateX(110%)}}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 0 rgba(233,189,89,0)}50%{box-shadow:0 0 24px rgba(233,189,89,.55)}}
+
+@media(max-width:800px){
+  .nav{padding:12px 14px;background:rgba(0,0,0,.76);backdrop-filter:blur(8px)}
+  .nav-links a:not(.btn){display:none}
+  .nav-links .btn{padding:10px 14px;font-size:.72rem}
+  .hero{
+    min-height:92svh;
+    padding:96px 16px 108px;
+    background-size:cover;
+    background-position:center top;
+  }
+  .hero-title{
+    font-size:clamp(3.15rem,18vw,5.2rem);
+    line-height:.9;
+    margin-bottom:16px;
+  }
+  .logline{font-size:.95rem;line-height:1.42}
+  .hero-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:18px}
+  .hero-actions .btn{width:100%;padding:14px 16px}
+  section{padding:64px 18px}
+  h2{font-size:clamp(2.1rem,12vw,3.8rem)}
+  .split{grid-template-columns:1fr;gap:24px}
+  .budget-grid,.tier-grid,.team-grid{grid-template-columns:1fr;gap:16px}
+  .lookbook-callout{min-height:380px;border-radius:20px;padding:28px 20px}
+  .sticky-donate{left:14px;right:14px;bottom:12px}
+  .sticky-donate .btn{width:100%;padding:14px 18px}
+  footer{padding-bottom:110px}
+}
+@media(max-width:420px){
+  .hero{min-height:88svh;padding-top:90px;padding-bottom:102px}
+  .hero-title{font-size:clamp(2.9rem,17vw,4.5rem)}
+}
+
+/* V18 FINAL HERO */
+.hero{
+  min-height:100svh !important;
+  position:relative !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  padding:110px 20px 100px !important;
+  background:linear-gradient(to bottom,rgba(0,0,0,.06),rgba(0,0,0,.22) 46%,rgba(0,0,0,.72) 100%),url('assets/hero-sunset-street.jpg') center center/cover no-repeat !important;
+  filter:none !important;
+  overflow:hidden !important;
+}
+.hero::before{content:none !important;display:none !important;}
+.hero::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:1 !important;
+  background:linear-gradient(to bottom,rgba(0,0,0,.04),rgba(0,0,0,.12) 45%,rgba(0,0,0,.72) 100%) !important;
+}
+.hero-content{
+  position:relative !important;
+  z-index:3 !important;
+  max-width:980px !important;
+  margin:auto !important;
+  padding:0 16px !important;
+  text-align:center !important;
+}
+.hero-title{
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  margin:0 0 18px !important;
+  color:#e9bd59 !important;
+  font-family:Inter,Arial,sans-serif !important;
+  font-size:clamp(4.6rem,12vw,10.5rem) !important;
+  line-height:.86 !important;
+  letter-spacing:.02em !important;
+  font-weight:1000 !important;
+  text-transform:uppercase !important;
+  text-shadow:0 8px 42px rgba(0,0,0,.82) !important;
+}
+.logline{
+  max-width:760px !important;
+  margin:0 auto !important;
+  font-size:clamp(1.02rem,1.8vw,1.28rem) !important;
+  color:#fff0ca !important;
+  text-shadow:0 2px 18px rgba(0,0,0,.82) !important;
+}
+.hero-actions{
+  margin-top:24px !important;
+  display:flex !important;
+  gap:12px !important;
+  justify-content:center !important;
+  flex-wrap:wrap !important;
+  position:relative !important;
+  z-index:4 !important;
+}
+.hero-actions .btn::before,.hero-actions .btn::after{content:none !important;display:none !important;}
+@media(max-width:800px){
+  .hero{
+    min-height:92svh !important;
+    padding:96px 16px 108px !important;
+    background:linear-gradient(to bottom,rgba(0,0,0,.04),rgba(0,0,0,.18) 45%,rgba(0,0,0,.76) 100%),url('assets/hero-sunset-street.jpg') center top/cover no-repeat !important;
+  }
+  .hero-title{
+    font-size:clamp(3.15rem,18vw,5.2rem) !important;
+    line-height:.9 !important;
+    margin-bottom:16px !important;
+  }
+  .logline{font-size:.95rem !important;line-height:1.42 !important;}
+  .hero-actions{display:grid !important;grid-template-columns:1fr !important;gap:10px !important;margin-top:18px !important;}
+  .hero-actions .btn{width:100% !important;padding:14px 16px !important;}
+}
+@media(max-width:420px){
+  .hero{min-height:88svh !important;padding-top:90px !important;padding-bottom:102px !important;}
+  .hero-title{font-size:clamp(2.9rem,17vw,4.5rem) !important;}
+}
+
+
+/* V19 asset/rendering fixes */
+.team-card img{
+  background:#111 !important;
+  object-fit:cover !important;
+}
+@media(max-width:800px){
+  .team-card img{
+    min-height:360px !important;
+  }
+}
+
+
+/* V22 COMPLETE UPLOAD PACKAGE — hero + live progress */
+.hero{
+  min-height:100svh !important;
+  position:relative !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  padding:110px 20px 100px !important;
+  background:linear-gradient(to bottom,rgba(0,0,0,.06),rgba(0,0,0,.22) 46%,rgba(0,0,0,.72) 100%),url('assets/hero-sunset-street.jpg') center center/cover no-repeat !important;
+  filter:none !important;
+  overflow:hidden !important;
+}
+.hero::before{content:none !important;display:none !important;}
+.hero::after{
+  content:"" !important;position:absolute !important;inset:0 !important;z-index:1 !important;
+  background:linear-gradient(to bottom,rgba(0,0,0,.04),rgba(0,0,0,.12) 45%,rgba(0,0,0,.72) 100%) !important;
+}
+.hero-content{position:relative !important;z-index:3 !important;max-width:980px !important;margin:auto !important;padding:0 16px !important;text-align:center !important;}
+.hero-title{
+  display:block !important;visibility:visible !important;opacity:1 !important;margin:0 0 18px !important;color:#e9bd59 !important;
+  font-family:Inter,Arial,sans-serif !important;font-size:clamp(4.6rem,12vw,10.5rem) !important;line-height:.86 !important;
+  letter-spacing:.02em !important;font-weight:1000 !important;text-transform:uppercase !important;text-shadow:0 8px 42px rgba(0,0,0,.82) !important;
+}
+.logline{max-width:760px !important;margin:0 auto !important;font-size:clamp(1.02rem,1.8vw,1.28rem) !important;color:#fff0ca !important;text-shadow:0 2px 18px rgba(0,0,0,.82) !important;}
+.hero-actions{margin-top:24px !important;display:flex !important;gap:12px !important;justify-content:center !important;flex-wrap:wrap !important;position:relative !important;z-index:4 !important;}
+.hero-actions .btn::before,.hero-actions .btn::after{content:none !important;display:none !important;}
+.progress-fill{width:var(--live-progress, 1.111%) !important;transition:width 1.2s ease !important;}
+.live-status{display:inline-block;margin-left:8px;padding:4px 8px;border:1px solid rgba(233,189,89,.35);border-radius:999px;color:#e9bd59;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;}
+@media(max-width:800px){
+  .hero{min-height:92svh !important;padding:96px 16px 108px !important;background:linear-gradient(to bottom,rgba(0,0,0,.04),rgba(0,0,0,.18) 45%,rgba(0,0,0,.76) 100%),url('assets/hero-sunset-street.jpg') center top/cover no-repeat !important;}
+  .hero-title{font-size:clamp(3.15rem,18vw,5.2rem) !important;line-height:.9 !important;margin-bottom:16px !important;}
+  .logline{font-size:.95rem !important;line-height:1.42 !important;}
+  .hero-actions{display:grid !important;grid-template-columns:1fr !important;gap:10px !important;margin-top:18px !important;}
+  .hero-actions .btn{width:100% !important;padding:14px 16px !important;}
+}
+@media(max-width:420px){
+  .hero{min-height:88svh !important;padding-top:90px !important;padding-bottom:102px !important;}
+  .hero-title{font-size:clamp(2.9rem,17vw,4.5rem) !important;}
+}
+
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Main navigation">
+  <div class="nav-links">
+    <a href="#progress">Progress</a>
+    <a href="#cast">Cast</a>
+    <a href="lookbook.html">Lookbook</a>
+    <a class="btn btn-primary" href="https://venmo.com/u/kawa_" target="_blank" rel="noopener">Donate</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-content">
+    <h1 class="hero-title">ROCK BOTTOM</h1>
+    <p class="logline">When two best friends realize they like the same girl, their friendship starts to unravel, revealing its toxicity.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://venmo.com/u/kawa_" target="_blank" rel="noopener">Donate to the Film</a>
+      <a class="btn btn-ghost" href="lookbook.html">View Lookbook</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="progress"><div class="section-inner progress-card">
+  <div class="progress-top"><div><div class="eyebrow">Campaign Progress</div><div class="amount" id="progressAmount">$50</div></div><div>raised of <strong id="progressGoal">$4,500</strong> goal</div></div>
+  <div class="progress-track" aria-label="$0 raised of $4,500 goal"><div class="progress-fill" id="progressFill"></div></div>
+  <p class="progress-note">Live progress updates from the private admin page. <span class="live-status" id="progressPercent">1.1% funded</span></p>
+</div></section>
+
+<section><div class="section-inner statement">
+  <h2>Filmmaker Statement</h2>
+  <p>Cree Kawa and Amalya Barseghyan are young actors who created Rock Bottom to showcase their acting and writing abilities.</p>
+  <p>Putting art first, they set out to tell a tender, twisted, and deeply relevant queer story centered on connection, vulnerability, and the complicated relationships we build with one another.</p>
+  <p>Created independently and driven by a passion for authentic storytelling, Rock Bottom represents a new generation of filmmakers committed to character-driven cinema that explores identity, intimacy, and belonging.</p>
+</div></section>
+
+<section><div class="section-inner split">
+  <div><div class="eyebrow">The Story</div><h2>Loyalty is tested.</h2><p class="lead">The past comes back to haunt the protagonists, unearthing secrets and old feelings. It becomes a journey to Rock Bottom.</p></div>
+  <img class="story-image" src="assets/lookbook/lookbook-page-02.png" alt="Rock Bottom story lookbook page">
+</div></section>
+
+<section><div class="section-inner"><div class="lookbook-callout"><div class="callout-content">
+  <div class="eyebrow">Visual Language</div><h2>Warm, toxic, tender.</h2>
+  <p class="lead">The lookbook builds a world of California sunset tones, shadowed interiors, warm reds, amber practicals, and intimate close-ups.</p>
+  <a class="btn btn-primary" href="lookbook.html">Open Digital Lookbook</a>
+</div></div></div></section>
+
+<section><div class="section-inner">
+  <div class="eyebrow">Where Donations Go</div><h2>Funding Breakdown</h2>
+  <div class="budget-grid">
+    <div class="card"><h3>Locations</h3><p>Securing practical locations that support the visual language of the film.</p></div>
+    <div class="card"><h3>Commissions</h3><p>Creative collaborators, production materials, and visual design support.</p></div>
+    <div class="card"><h3>Post-Production</h3><p>Editing, color, sound design, music, and final delivery.</p></div>
+    <div class="card"><h3>Marketing</h3><p>Festival submissions, promotional assets, and audience outreach.</p></div>
+  </div>
+</div></section>
+
+<section><div class="section-inner">
+  <div class="eyebrow">Support Levels</div><h2>Donation Tiers</h2>
+  <div class="tier-grid">
+    <div class="tier"><h3>$25</h3><p>Friend of the Film</p></div>
+    <div class="tier"><h3>$50</h3><p>Supporter</p></div>
+    <div class="tier"><h3>$100</h3><p>Special Thanks Credit</p></div>
+    <div class="tier"><h3>$250</h3><p>Producer Circle</p></div>
+    <div class="tier"><h3>$500+</h3><p>Executive Supporter</p></div>
+  </div>
+</div></section>
+
+<section id="cast"><div class="section-inner">
+  <div class="eyebrow">Cast</div><h2>Meet the Cast</h2>
+  <div class="team-grid">
+    <article class="team-card"><img src="assets/cree.jpg" alt="Cree Kawa headshot"><div class="team-info"><div class="role">Diamond</div><h3>Cree Kawa</h3><a class="imdb-link" href="https://www.imdb.com/name/nm8137313/" target="_blank" rel="noopener">IMDb</a></div></article>
+    <article class="team-card"><img src="assets/amalya.jpg" alt="Amalya Barseghyan headshot"><div class="team-info"><div class="role">Jade</div><h3>Amalya Barseghyan</h3><a class="imdb-link" href="https://www.imdb.com/name/nm14486003/" target="_blank" rel="noopener">IMDb</a></div></article>
+    <article class="team-card"><img src="assets/mariana.jpg" alt="Mariana Panzarella headshot"><div class="team-info"><div class="role">Tara</div><h3>Mariana Panzarella</h3><a class="imdb-link" href="https://www.imdb.com/name/nm17284282/" target="_blank" rel="noopener">IMDb</a></div></article>
+    <article class="team-card"><div class="placeholder">TBD<br>BRITTNEY</div><div class="team-info"><div class="role">Brittney</div><h3>TBD</h3><span class="imdb-link">Casting Soon</span></div></article>
+  </div>
+</div></section>
+
+<section><div class="section-inner">
+  <div class="eyebrow">Filmmakers</div><h2>Crew</h2>
+  <div class="team-grid">
+    <article class="card"><h3>Jagger Blue</h3><p>Director</p><a class="imdb-link" href="https://www.imdb.com/name/nm12357354/" target="_blank" rel="noopener">IMDb</a></article>
+    <article class="card"><h3>Cree Kawa</h3><p>Writer</p><a class="imdb-link" href="https://www.imdb.com/name/nm8137313/" target="_blank" rel="noopener">IMDb</a></article>
+    <article class="card"><h3>Amalya Barseghyan</h3><p>Writer</p><a class="imdb-link" href="https://www.imdb.com/name/nm14486003/" target="_blank" rel="noopener">IMDb</a></article>
+  </div>
+</div></section>
+
+<section><div class="section-inner progress-card">
+  <div class="eyebrow">Donate</div><h2>Help bring Rock Bottom to life.</h2>
+  <p class="lead">Every contribution supports independent filmmaking and the artists bringing this story to screen.</p>
+  <a class="btn btn-primary" href="https://venmo.com/u/kawa_" target="_blank" rel="noopener">Donate via Venmo @kawa_</a>
+</div></section>
+</main>
+
+<div class="sticky-donate"><a class="btn btn-primary" href="https://venmo.com/u/kawa_" target="_blank" rel="noopener">Donate</a></div>
+<footer><p>Rock Bottom - Independent Short Film</p><p><a href="lookbook.html">Digital Lookbook</a> · <a href="assets/rock-bottom-lookbook.pdf" target="_blank" rel="noopener">Full PDF</a> · <a href="https://pro.imdb.com/title/tt42752226" target="_blank" rel="noopener">IMDbPro</a></p></footer>
+
+<script>
+(function(){
+  const amountEl = document.getElementById("progressAmount");
+  const goalEl = document.getElementById("progressGoal");
+  const fillEl = document.getElementById("progressFill");
+  const pctEl = document.getElementById("progressPercent");
+  function money(n){ return "$" + Number(n || 0).toLocaleString(undefined, { maximumFractionDigits: 0 }); }
+  async function loadProgress(){
+    try{
+      const res = await fetch("/.netlify/functions/progress", { cache: "no-store" });
+      if(!res.ok) throw new Error("Progress unavailable");
+      const data = await res.json();
+      const amount = Number(data.amount || 0);
+      const goal = Number(data.goal || 4500);
+      const pct = goal > 0 ? Math.min(100, (amount / goal) * 100) : 0;
+      if(amountEl) amountEl.textContent = money(amount);
+      if(goalEl) goalEl.textContent = money(goal);
+      document.documentElement.style.setProperty("--live-progress", pct + "%");
+      if(fillEl) fillEl.style.width = pct + "%";
+      if(pctEl) pctEl.textContent = pct.toFixed(pct < 10 && pct > 0 ? 1 : 0) + "% funded";
+    }catch(err){ console.warn("Live progress requires Git-connected Netlify Functions.", err); }
+  }
+  loadProgress();
+})();
+</script>
+
+</body>
+</html>

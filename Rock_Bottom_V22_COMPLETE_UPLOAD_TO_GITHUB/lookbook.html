@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rock Bottom | Digital Lookbook</title>
+<style>
+:root{--black:#0b0b0a;--cream:#f4ead7;--gold:#e9bd59;--muted:#b69a78}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--black);color:var(--cream);font-family:Inter,Arial,sans-serif;line-height:1.6;overflow-x:hidden}
+.topnav{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(to bottom,rgba(0,0,0,.9),rgba(0,0,0,.12));backdrop-filter:blur(8px)}
+.topnav a{color:var(--gold);text-decoration:none;font-weight:900;letter-spacing:.12em;text-transform:uppercase;font-size:.82rem}
+header{min-height:52vh;display:grid;place-items:center;text-align:center;padding:96px 20px 54px;background:radial-gradient(circle at 50% 20%,rgba(233,189,89,.18),transparent 34%),linear-gradient(135deg,#2b130d 0%,#0b0b0a 58%,#050505 100%)}
+h1{color:var(--gold);font-size:clamp(3rem,12vw,8rem);line-height:.95;margin:0;text-transform:uppercase}
+p{max-width:760px;margin-left:auto;margin-right:auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 22px;border-radius:999px;background:var(--gold);color:#111;text-decoration:none;font-weight:900;text-transform:uppercase;margin:8px;border:1px solid rgba(233,189,89,.35)}
+.ghost{background:rgba(0,0,0,.45);color:var(--gold)}
+main{max-width:1180px;margin:0 auto;padding:54px 20px 100px}
+.viewer{margin:0 auto 46px;border:1px solid rgba(233,189,89,.28);border-radius:18px;overflow:hidden;background:#111;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.viewer iframe{width:100%;height:78vh;border:0;display:block;background:#111}
+.viewer-note{color:var(--muted);font-size:.95rem;text-align:center;margin:12px auto 0}
+.deck-page{margin:0 0 44px}
+.deck-page img{width:100%;display:block;border-radius:18px;border:1px solid rgba(233,189,89,.2);box-shadow:0 30px 80px rgba(0,0,0,.45);background:#111}
+figcaption{color:var(--muted);margin-top:10px;text-align:center;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
+.pdf-note{text-align:center;border:1px solid rgba(233,189,89,.25);border-radius:20px;padding:30px 20px;margin-top:24px;background:rgba(255,255,255,.04)}
+@media(max-width:700px){
+  .topnav{padding:12px 14px}
+  .topnav a{font-size:.7rem;letter-spacing:.08em}
+  header{min-height:45vh;padding-top:92px;padding-bottom:40px}
+  h1{font-size:clamp(2.7rem,15vw,4.3rem)}
+  .btn{width:100%;margin:6px 0}
+  main{padding:30px 10px 90px}
+  .viewer iframe{height:68vh}
+  .deck-page{margin-bottom:24px}
+  .deck-page img{border-radius:10px;box-shadow:0 18px 46px rgba(0,0,0,.42)}
+}
+</style>
+</head>
+<body>
+<nav class="topnav"><a href="index.html">Back to Site</a><a href="https://venmo.com/u/kawa_" target="_blank" rel="noopener">Donate</a></nav>
+<header>
+  <div>
+    <h1>Lookbook</h1>
+    <p>Rock Bottom - Short Film Visual Deck</p>
+    <a class="btn ghost" href="#pages">View Pages</a>
+    <a class="btn" href="#pdf-viewer">View PDF</a>
+  </div>
+</header>
+<main>
+  <section id="pdf-viewer" class="viewer" aria-label="Embedded Rock Bottom lookbook PDF">
+    <iframe src="assets/rock-bottom-lookbook.pdf#toolbar=1&navpanes=0&view=FitH" title="Rock Bottom Lookbook PDF"></iframe>
+  </section>
+  <p class="viewer-note">If your browser does not display the PDF inline, use the page images below.</p>
+  <section id="pages">
+    <figure class="deck-page">
+      <img src="assets/lookbook/lookbook-page-01.png" alt="Rock Bottom lookbook page 1" loading="lazy">
+      <figcaption>Page 1</figcaption>
+    </figure>
+<figure class="deck-page">
+      <img src="assets/lookbook/lookbook-page-02.png" alt="Rock Bottom lookbook page 2" loading="lazy">
+      <figcaption>Page 2</figcaption>
+    </figure>
+<figure class="deck-page">
+      <img src="assets/lookbook/lookbook-page-03.png" alt="Rock Bottom lookbook page 3" loading="lazy">
+      <figcaption>Page 3</figcaption>
+    </figure>
+<figure class="deck-page">
+      <img src="assets/lookbook/lookbook-page-04.png" alt="Rock Bottom lookbook page 4" loading="lazy">
+      <figcaption>Page 4</figcaption>
+    </figure>
+<figure class="deck-page">
+      <img src="assets/lookbook/lookbook-page-05.png" alt="Rock Bottom lookbook page 5" loading="lazy">
+      <figcaption>Page 5</figcaption>
+    </figure>
+<figure class="deck-page">
+      <img src="assets/lookbook/lookbook-page-06.png" alt="Rock Bottom lookbook page 6" loading="lazy">
+      <figcaption>Page 6</figcaption>
+    </figure>
+<figure class="deck-page">
+      <img src="assets/lookbook/lookbook-page-07.png" alt="Rock Bottom lookbook page 7" loading="lazy">
+      <figcaption>Page 7</figcaption>
+    </figure>
+<figure class="deck-page">
+      <img src="assets/lookbook/lookbook-page-08.png" alt="Rock Bottom lookbook page 8" loading="lazy">
+      <figcaption>Page 8</figcaption>
+    </figure>
+<figure class="deck-page">
+      <img src="assets/lookbook/lookbook-page-09.png" alt="Rock Bottom lookbook page 9" loading="lazy">
+      <figcaption>Page 9</figcaption>
+    </figure>
+<figure class="deck-page">
+      <img src="assets/lookbook/lookbook-page-10.png" alt="Rock Bottom lookbook page 10" loading="lazy">
+      <figcaption>Page 10</figcaption>
+    </figure>
+  </section>
+  <div class="pdf-note">
+    <p>The lookbook is viewable on this page. The file link is included only as a backup.</p>
+    <a class="btn" href="assets/rock-bottom-lookbook.pdf" target="_blank" rel="noopener">Open PDF in Browser</a>
+  </div>
+</main>
+</body>
+</html>

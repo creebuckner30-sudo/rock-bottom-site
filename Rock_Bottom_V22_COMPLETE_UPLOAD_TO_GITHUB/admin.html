@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rock Bottom Admin</title>
+<style>
+:root{--black:#0b0b0a;--cream:#f4ead7;--gold:#e9bd59;--muted:#b69a78;--rust:#bd562c}
+*{box-sizing:border-box}body{margin:0;min-height:100svh;background:radial-gradient(circle at top,rgba(233,189,89,.16),transparent 34%),#0b0b0a;color:var(--cream);font-family:Inter,Arial,sans-serif;display:grid;place-items:center;padding:24px}.card{width:min(560px,100%);background:rgba(255,255,255,.05);border:1px solid rgba(233,189,89,.25);border-radius:24px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.35)}h1{margin:0 0 8px;color:var(--gold);font-size:clamp(2.2rem,8vw,4rem);text-transform:uppercase;line-height:.95}p{color:#e7d7bd}label{display:block;margin-top:18px;margin-bottom:8px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}input{width:100%;padding:15px 14px;border-radius:12px;border:1px solid rgba(233,189,89,.28);background:#0f0f0f;color:var(--cream);font-size:1.1rem}button{width:100%;margin-top:22px;padding:15px 18px;border:0;border-radius:999px;background:var(--gold);color:#111;font-weight:1000;text-transform:uppercase;letter-spacing:.06em;cursor:pointer}.status{margin-top:16px;color:var(--gold);min-height:24px}.preview{margin-top:22px;padding:18px;border:1px solid rgba(233,189,89,.18);border-radius:16px;background:rgba(0,0,0,.22)}.track{height:20px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.12)}.fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),#fff0a7,var(--rust));transition:width .6s ease}small{display:block;margin-top:14px;color:var(--muted);line-height:1.45}a{color:var(--gold)}
+</style>
+</head>
+<body>
+<main class="card">
+  <h1>Rock Bottom Admin</h1>
+  <p>Update the live fundraising total without rebuilding the website.</p>
+  <label for="pin">Admin PIN</label><input id="pin" type="password" placeholder="Enter admin PIN">
+  <label for="amount">Current Amount Raised</label><input id="amount" type="number" min="0" step="1" value="50">
+  <label for="goal">Goal</label><input id="goal" type="number" min="1" step="1" value="4500">
+  <button id="save">Save Progress</button><div class="status" id="status"></div>
+  <section class="preview"><strong id="previewText">$50 raised of $4,500</strong><div class="track" style="margin-top:12px"><div class="fill" id="previewFill"></div></div></section>
+  <small>Default PIN is <strong>rockbottom</strong>. For launch, set your own PIN in Netlify: Project configuration → Environment variables → add <strong>ADMIN_PIN</strong>.</small>
+  <small><a href="index.html">Back to site</a></small>
+</main>
+<script>
+const pinEl=document.getElementById("pin"),amountEl=document.getElementById("amount"),goalEl=document.getElementById("goal"),saveBtn=document.getElementById("save"),statusEl=document.getElementById("status"),previewText=document.getElementById("previewText"),previewFill=document.getElementById("previewFill");
+function money(n){return "$"+Number(n||0).toLocaleString(undefined,{maximumFractionDigits:0})}
+function updatePreview(){const amount=Number(amountEl.value||0),goal=Number(goalEl.value||4500),pct=goal>0?Math.min(100,amount/goal*100):0;previewText.textContent=`${money(amount)} raised of ${money(goal)} (${pct.toFixed(pct<10&&pct>0?1:0)}%)`;previewFill.style.width=pct+"%"}
+async function loadProgress(){try{const res=await fetch("/.netlify/functions/progress",{cache:"no-store"});if(!res.ok)return updatePreview();const data=await res.json();amountEl.value=data.amount??50;goalEl.value=data.goal??4500;updatePreview()}catch(e){updatePreview()}}
+async function saveProgress(){statusEl.textContent="Saving...";saveBtn.disabled=true;try{const res=await fetch("/.netlify/functions/progress",{method:"POST",headers:{"Content-Type":"application/json","x-admin-pin":pinEl.value},body:JSON.stringify({amount:Number(amountEl.value),goal:Number(goalEl.value)})});const data=await res.json();if(!res.ok)throw new Error(data.error||"Could not save progress.");amountEl.value=data.amount;goalEl.value=data.goal;updatePreview();statusEl.textContent="Saved. Public site is now updated."}catch(e){statusEl.textContent=e.message+" If this is deployed with Netlify Drop, use GitHub/Netlify instead."}finally{saveBtn.disabled=false}}
+amountEl.addEventListener("input",updatePreview);goalEl.addEventListener("input",updatePreview);saveBtn.addEventListener("click",saveProgress);loadProgress();
+</script>
+</body>
+</html>
