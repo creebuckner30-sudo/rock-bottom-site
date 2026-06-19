@@ -1,9 +1,10 @@
-const { getStore } = require("@netlify/blobs");
+const { getStore, connectLambda } = require("@netlify/blobs");
 
 const DEFAULT_AMOUNT = 50;
 const DEFAULT_GOAL = 4500;
 
 exports.handler = async (event) => {
+  connectLambda(event);
   const headers = {
     "Content-Type": "application/json",
     "Cache-Control": "no-store",
